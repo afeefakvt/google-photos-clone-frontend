@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { loginUser } from "@/api/auth"
-import { useNavigate } from "react-router-dom"
+import { useNavigate,Link } from "react-router-dom"
 
 export default function Login() {
   const [email, setEmail] = useState("")
@@ -19,7 +19,8 @@ export default function Login() {
       localStorage.setItem('token',res.access_token)
       navigate('/home')
     } catch (err) {
-          console.error(err);
+      alert(err)
+      console.error(err);
     }
   }
 
@@ -58,6 +59,12 @@ export default function Login() {
         <Button type="submit" className="w-full">
           Log In
         </Button>
+         <p className="text-center text-sm text-gray-600 dark:text-gray-400">
+          Don’t have an account?{" "}
+          <Link to="/register" className="text-blue-600 hover:underline dark:text-blue-400">
+            Register
+          </Link>
+        </p>
       </form>
     </div>
   )

@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { registerUser } from "@/api/auth"
-import { useNavigate } from "react-router-dom"
+import { useNavigate,Link } from "react-router-dom"
 
 export default function Register() {
   const [name, setName] = useState("")
@@ -20,6 +20,7 @@ export default function Register() {
     await registerUser(email,name,password)
     navigate('/')
    } catch (error) {
+    alert(error)
     console.error(error);
     
    }
@@ -72,6 +73,12 @@ export default function Register() {
         <Button type="submit" className="w-full">
           Register
         </Button>
+         <p className="text-center text-sm text-gray-600 dark:text-gray-400">
+          Already have an account?{" "}
+          <Link to="/" className="text-blue-600 hover:underline dark:text-blue-400">
+            Login
+          </Link>
+        </p>
       </form>
     </div>
   )
