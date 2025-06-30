@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Upload } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { createAlbum } from "@/api/album";
-import { uploadPhoto } from "@/api/photos"; // assumes single upload handler
 
 
 export default function CreateAlbum() {

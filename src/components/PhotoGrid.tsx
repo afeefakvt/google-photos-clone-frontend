@@ -1,6 +1,6 @@
 "use client"
 import { useEffect, useState } from "react"
-import { getUserPhotos, searchPhotos } from "@/api/photos"
+import { searchPhotos } from "@/api/photos"
 import type { Photo } from "@/api/photos"
 import MobileSearch from "@/components/MobileSearch"
 import dayjs from "dayjs"
