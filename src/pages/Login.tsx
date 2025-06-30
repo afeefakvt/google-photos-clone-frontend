@@ -1,19 +1,26 @@
 'use client'
 
-import { useState } from "react"
+import React, { useState } from "react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
+import { loginUser } from "@/api/auth"
+import { useNavigate } from "react-router-dom"
 
 export default function Login() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const navigate = useNavigate()
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log("Email:", email)
-    console.log("Password:", password)
-    // Handle login logic
+  const handleSubmit = async(e:React.FormEvent) => {
+    try {
+      e.preventDefault()
+      const res = await loginUser(email,password);
+      localStorage.setItem('token',res.access_token)
+      navigate('/home')
+    } catch (err) {
+          console.error(err);
+    }
   }
 
   return (

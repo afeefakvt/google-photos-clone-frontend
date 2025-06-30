@@ -36,6 +36,7 @@ export default function FeaturedItems() {
   ]
 
   return (
+    
     <div className="mb-6 sm:mb-8">
       <div className="flex gap-3 sm:gap-4 overflow-x-auto pb-4 -mx-1">
         {featuredItems.map((item, index) => (

@@ -4,18 +4,25 @@ import { useState } from "react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
+import { registerUser } from "@/api/auth"
+import { useNavigate } from "react-router-dom"
 
 export default function Register() {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const navigate = useNavigate()
 
-  const handleSubmit = (e: React.FormEvent) => {
+
+  const handleSubmit = async(e: React.FormEvent) => {
     e.preventDefault()
-    console.log("Name:", name)
-    console.log("Email:", email)
-    console.log("Password:", password)
-    // Handle registration logic
+   try {
+    await registerUser(email,name,password)
+    navigate('/')
+   } catch (error) {
+    console.error(error);
+    
+   }
   }
 
   return (

@@ -1,8 +1,11 @@
 "use client"
-
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Search, Menu, Plus, HelpCircle, Settings, Grid3X3 } from "lucide-react"
+import CreateModal from "./Modal"
+import { useSearch } from "@/contexts/SearchContext"
+
 
 interface HeaderProps {
   sidebarOpen: boolean
@@ -10,6 +13,10 @@ interface HeaderProps {
 }
 
 export default function Header({ sidebarOpen, setSidebarOpen }: HeaderProps) {
+    const [showCreateModal, setShowCreateModal] = useState(false)
+    const { search, setSearch } = useSearch()
+
+
   return (
     <header className="flex items-center justify-between px-3 sm:px-4 py-2 sm:py-3 border-b border-gray-700">
       <div className="flex items-center gap-2 sm:gap-4">
@@ -29,8 +36,10 @@ export default function Header({ sidebarOpen, setSidebarOpen }: HeaderProps) {
         <div className="relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
           <Input
-            placeholder="Search your photos and albums"
+            placeholder="Search your photos"
             className="pl-10 bg-[#303134] border-gray-600 text-white placeholder-gray-400 focus:border-blue-500"
+             value={search}
+            onChange={(e) => setSearch(e.target.value)}
           />
         </div>
       </div>
@@ -42,7 +51,9 @@ export default function Header({ sidebarOpen, setSidebarOpen }: HeaderProps) {
         </Button>
 
         {/* Desktop Icons */}
-        <Button variant="ghost" size="sm" className="text-white hover:bg-gray-700 hidden lg:flex">
+        <Button variant="ghost" size="sm"className="text-white hover:bg-gray-700 p-1 sm:p-2"
+        onClick={() => setShowCreateModal(true)}
+>
           <Plus className="h-5 w-5" />
         </Button>
         <Button variant="ghost" size="sm" className="text-white hover:bg-gray-700 hidden lg:flex">
@@ -59,6 +70,8 @@ export default function Header({ sidebarOpen, setSidebarOpen }: HeaderProps) {
           A
         </div>
       </div>
+            <CreateModal isOpen={showCreateModal} onClose={() => setShowCreateModal(false)} />
+
     </header>
   )
 }
